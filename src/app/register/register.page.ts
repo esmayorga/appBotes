@@ -13,53 +13,51 @@ export class RegisterPage  {
 
   registerForm: FormGroup;
   validationMessages = {
-    nombre:[
-      {type:"requiered", message: "El nombre es requerido"},
-      {type:"minlength", message: "El nombre debe tener minimo tres letras"}
+    nombre: [
+      {type: 'requiered', message: 'El nombre es requerido'},
+      {type: 'minlength', message: 'El nombre debe tener minimo tres letras'}
     ],
 
     apellido: [
-      {type: "requered", message: "El apellido es requerido."},
-      {type:"minlength", message: "El apellido debe tener minimo 3 letras"}
+      {type: 'requered', message: 'El apellido es requerido.'},
+      {type: 'minlength', message: 'El apellido debe tener minimo 3 letras'}
     ],
 
 
     email: [
-      {type:"requiered", message: "El Email es requerido"},
-      {type:'pattern', message: "Correo no valido"}
-    ], 
+      {type: 'requiered', message: 'El Email es requerido'},
+      {type: 'pattern', message: 'Correo no valido'}
+    ],
     password: [
-      {type:"requiered", message: "la password es requerida"},
-      {type:"minlength", message: "la password debe tener minimo 6 caracteres"}
+      {type: 'requiered', message: 'la password es requerida'},
+      {type: 'minlength', message: 'la password debe tener minimo 6 caracteres'}
 
     ]
-   
-  }
 
-  errorMessage:string = "";
+  };
+
+  errorMessage = '';
 
   constructor(private formBuilder: FormBuilder, private authService: AuthenticateService, private navCtrl: NavController,
-    private storage: Storage ) { 
+              private storage: Storage ) {
     this.registerForm = this.formBuilder.group({
 
-      email: new FormControl("", Validators.compose([
-        Validators.required, 
-        // patron de correo
-        Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")
-      ])),
-
-      password: new FormControl("", Validators.compose([
+      email: new FormControl('', Validators.compose([
         Validators.required,
-        // minimo de caracteres
-        Validators.minLength(5)        
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
 
-      apellido: new FormControl("", Validators.compose([
+      password: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(5)
+      ])),
+
+      apellido: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(3)
       ])),
 
-      nombre: new FormControl("", Validators.compose([
+      nombre: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(3)
       ]))
@@ -68,21 +66,14 @@ export class RegisterPage  {
   }
 
 
-  register(userData){
-    
+  register(userData) {
     this.authService.registerUser(userData).then(() => {
       this.navCtrl.navigateBack('/login');
     });
   }
 
-  goToLogin(){
+  goToLogin() {
     this.navCtrl.navigateBack('/login');
   }
-
-  
-
- 
-
-
 
 }

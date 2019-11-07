@@ -34,7 +34,7 @@ export class MenuPage implements OnInit {
   }
 
   goToSport(){
-    this.navCtrl.navigateRoot("/menu/sports");
+    this.navCtrl.navigateRoot("");
     this.menu.close();
   }
 

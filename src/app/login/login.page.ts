@@ -12,40 +12,35 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  
+
   loginForm: FormGroup;
   validationMessages = {
     email: [
-      {type:"requiered", message: "El Email es requerido"},
-      {type:'pattern', message: "Correo no valido"}
-    ], 
+      {type: 'requiered', message: 'El Email es requerido'},
+      {type: 'pattern', message: 'Correo no valido'}
+    ],
     password: [
-      {type:"requiered", message: "la password es requerida"},
-      {type:"minlength", message: "la password deb e tener minimo 6 caracteres"}
+      {type: 'requiered', message: 'la password es requerida'},
+      {type: 'minlength', message: 'la password deb e tener minimo 6 caracteres'}
 
     ]
-   
-  }
 
-  errorMessage:string = "";
+  };
+
+  errorMessage = '';
 
 
   constructor(private formBuilder: FormBuilder, private authService: AuthenticateService, private navCtrl: NavController,
-    private storage: Storage ) { 
+              private storage: Storage ) {
     this.loginForm = this.formBuilder.group({
-      email: new FormControl("", Validators.compose([
-        Validators.required, 
-        // patron de correo
-        Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")
+      email: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
 
-      password: new FormControl("", Validators.compose([
+      password: new FormControl('', Validators.compose([
         Validators.required,
-        // minimo de caracteres
         Validators.minLength(5)
-
-        // patron de correo
-        
       ]))
 
     });
@@ -53,11 +48,11 @@ export class LoginPage implements OnInit {
 
   ngOnInit() { }
 
-  loginUser(credentials){
+  loginUser(credentials) {
     this.authService.loginUser(credentials).then(res => {
-      this.errorMessage="";
-      this.storage.set( "isUserLoggedIn", true);
-      this.navCtrl.navigateForward("/menu/home");
+      this.errorMessage = '';
+      this.storage.set( 'isUserLoggedIn', true);
+      this.navCtrl.navigateForward('/menu/home');
     }).catch(
       err => {
         this.errorMessage = err;
@@ -66,7 +61,7 @@ export class LoginPage implements OnInit {
     );
   }
 
-  goToRegister(){
+  goToRegister() {
     this.navCtrl.navigateForward('/register');
 
   }
