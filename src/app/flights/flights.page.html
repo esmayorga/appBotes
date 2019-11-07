@@ -1,0 +1,103 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="end">
+          <ion-menu-button> </ion-menu-button>
+        </ion-buttons>
+      </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <figure>
+        <img src="assets/img/logo.png"/>
+    </figure>
+
+    <h1 text-center > ¿Donde será tu nueva aventura? </h1>
+
+  
+    <ion-label>  </ion-label>
+   <p></p>
+   
+  <ion-toolbar>
+        <ion-segment end>
+     <ion-segment-button value="new" (click)="returnDate()">
+       Ida y vuelta
+      </ion-segment-button>
+      <ion-segment-button value="hot" (click)="dateDeparture()">
+        Sólo ida
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+
+  <form >  
+    <ion-item>
+      <ion-label> Origen: </ion-label>
+      <ion-input placeholder="Ingresa una ciudad o Aeropuerto." > </ion-input>
+        </ion-item>
+      
+    <ion-item>
+      <ion-label> Destino: </ion-label>
+      <ion-input placeholder="Ingresa una ciudad o Aeropuerto." > </ion-input>
+    </ion-item>
+      
+    <ion-item>
+      <ion-label> Fecha de ida: </ion-label>
+      <ion-input type="date" > </ion-input>
+    </ion-item>
+      
+    <ion-item *ngIf="dateDepartur">
+        <ion-label> Fecha de Regreso: </ion-label>
+        <ion-input type="date"> </ion-input>
+    </ion-item>
+
+    <ion-button 
+      expand="full" 
+      shape="round"
+      
+      type="submit"
+    >
+      Reservar
+  </ion-button>
+
+
+  </form>
+
+
+</ion-content>
+
+
+
+ 
+
+    
+    
+
+
+
+  <!-- 
+  <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="schedule">
+          <ion-icon name="home"></ion-icon>
+          <ion-label>Mis viajes</ion-label>
+        </ion-tab-button>
+    
+        <ion-tab-button tab="speakers">
+          <ion-icon name="contacts"></ion-icon>
+          <ion-label>Speakers</ion-label>
+        </ion-tab-button>
+    
+        <ion-tab-button tab="map">
+          <ion-icon name="map"></ion-icon>
+          <ion-label>Map</ion-label>
+        </ion-tab-button>
+    
+        <ion-tab-button tab="about">
+          <ion-icon name="information-circle"></ion-icon>
+          <ion-label>About</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  -->
+
