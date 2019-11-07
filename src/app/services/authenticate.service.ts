@@ -1,5 +1,4 @@
-import { Injectable, ɵCompiler_compileModuleAndAllComponentsSync__POST_R3__ } from '@angular/core';
-import { reject } from 'q';
+import { Injectable } from '@angular/core';
 import { Storage } from "@ionic/storage";
 
 @Injectable({

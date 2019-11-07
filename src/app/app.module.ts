@@ -10,6 +10,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage';
 
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 
 
@@ -21,7 +25,12 @@ import { IonicStorageModule } from '@ionic/storage';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    IonicStorageModule.forRoot(),],
+    IonicStorageModule.forRoot(),
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseQuergeo),
+
+   ],
   providers: [
     StatusBar,
     SplashScreen,
