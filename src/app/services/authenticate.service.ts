@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Storage } from "@ionic/storage";
+import { Storage } from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -7,25 +7,27 @@ import { Storage } from "@ionic/storage";
 export class AuthenticateService {
 
   constructor(private storage: Storage) { }
-  async loginUser(credential){
+  async loginUser(credential) {
     // backen para una url
-    //return fetch("url-personal");
-    const user = await this.storage.get("user");
-    
+    // return fetch("url-personal");
+
+    const user = await this.storage.get('user');
+
     return new Promise((accept, reject) => {
       if (
-        user.email == credential.email &&
-        user.password == btoa(credential.password)
+
+        user.email === credential.email &&
+        user.password === btoa(credential.password)
       ) {
-        accept("Login correcto");
+        accept('Login correcto');
       } else {
-        reject("login incorrecto");
+        reject('login incorrecto');
       }
     });
   }
 
-  registerUser(userData){
+  registerUser(userData) {
    userData.password = btoa(userData.password);
-   return this.storage.set("user", userData);
+   return this.storage.set('user', userData);
   }
 }

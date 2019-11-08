@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { AuthenticateService } from '../services/authenticate.service';
 import { NavController } from '@ionic/angular';
-import { Storage } from '@ionic/storage';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-register',
@@ -38,8 +39,13 @@ export class RegisterPage  {
 
   errorMessage = '';
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthenticateService, private navCtrl: NavController,
-              private storage: Storage ) {
+  constructor(private formBuilder: FormBuilder,
+              private authService: AuthService,
+              private navCtrl: NavController,
+              private router: Router
+               ) {
+
+
     this.registerForm = this.formBuilder.group({
 
       email: new FormControl('', Validators.compose([
@@ -65,12 +71,27 @@ export class RegisterPage  {
     });
   }
 
+  register(event: Event) {
+    event.preventDefault();
+    if (this.registerForm.valid) {
+      const value = this.registerForm.value;
+      this.authService.createUser(value.email, value.password)
+      .then(() => {
+        this.router.navigate(['/login']);
+      });
+    }
+  }
 
-  register(userData) {
-    this.authService.registerUser(userData).then(() => {
-      this.navCtrl.navigateBack('/login');
+  private buildForm() {
+    this.registerForm = this.formBuilder.group({
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     });
   }
+
+
+
+
 
   goToLogin() {
     this.navCtrl.navigateBack('/login');

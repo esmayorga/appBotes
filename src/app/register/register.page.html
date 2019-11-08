@@ -15,7 +15,7 @@
     <img src="assets/img/logo.png" />
   </figure>
 
-  <form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
+  <form [formGroup]="registerForm" (ngSubmit)="register($event)">
 
    <ion-item>
      <ion-label> Nombre: </ion-label>
