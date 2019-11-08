@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -42,7 +42,8 @@ export class RegisterPage  {
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
               private navCtrl: NavController,
-              private router: Router
+              private router: Router,
+              private alertController: AlertController
                ) {
 
 
@@ -77,24 +78,44 @@ export class RegisterPage  {
       const value = this.registerForm.value;
       this.authService.createUser(value.email, value.password)
       .then(() => {
+        this.correctUserAlert();
         this.router.navigate(['/login']);
+      }).catch(() => {
+        this.incorrectUserAlert();
       });
     }
   }
-
-  private buildForm() {
-    this.registerForm = this.formBuilder.group({
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-    });
-  }
-
-
-
 
 
   goToLogin() {
     this.navCtrl.navigateBack('/login');
   }
 
+  async correctUserAlert() {
+    const alert = await this.alertController.create({
+      header: '¡Felicitaciones!',
+      // subHeader: 'Subtitle',
+      message: 'Usuario fue creado Exitosamente',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async incorrectUserAlert() {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      // subHeader: 'Subtitle',
+      message: 'Ya tienes cuenta en Operacion Quergeo',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+
+
+
+
 }
+

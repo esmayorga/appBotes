@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -34,9 +35,10 @@ export class LoginPage implements OnInit {
               private authService: AuthService,
               private navCtrl: NavController,
               private router: Router,
+              private alertController: AlertController
                ) {
 
-    this.buildForm();
+
     this.loginForm = this.formBuilder.group({
       email: new FormControl('', Validators.compose([
         Validators.required,
@@ -51,6 +53,9 @@ export class LoginPage implements OnInit {
     });
   }
 
+
+
+
   ngOnInit() { }
 
   login(event: Event) {
@@ -60,22 +65,26 @@ export class LoginPage implements OnInit {
       this.authService.login(value.email, value.password).then(() => {
         this.router.navigate(['/menu']);
       }) .catch(() => {
-          alert('no es valido');
+          this.presentAlert();
       });
 
     }
   }
 
-  private buildForm() {
-    this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-    });
-  }
-
-
   goToRegister() {
     this.navCtrl.navigateForward('/register');
 
+  }
+
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      // subHeader: 'Subtitle',
+      message: 'El correo o la contraseña son incorrectas',
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 }
