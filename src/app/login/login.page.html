@@ -9,7 +9,7 @@
     <img src="assets/img/logo.png"/>
   </figure>
 
-  <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
+  <form [formGroup]="loginForm" (ngSubmit)="login($event)">
     <ion-item>
       <ion-label> Email: </ion-label>
       <ion-input formControlName="email"> </ion-input>
@@ -23,6 +23,7 @@
         </div> 
       </ng-container>
     </div>
+    
     
 
     <ion-item>

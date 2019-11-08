@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
-import { AuthenticateService } from '../services/authenticate.service';
 import { NavController } from '@ionic/angular';
-import { Storage } from '@ionic/storage';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -30,8 +30,13 @@ export class LoginPage implements OnInit {
   errorMessage = '';
 
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthenticateService, private navCtrl: NavController,
-              private storage: Storage ) {
+  constructor(private formBuilder: FormBuilder,
+              private authService: AuthService,
+              private navCtrl: NavController,
+              private router: Router,
+               ) {
+
+    this.buildForm();
     this.loginForm = this.formBuilder.group({
       email: new FormControl('', Validators.compose([
         Validators.required,
@@ -48,18 +53,26 @@ export class LoginPage implements OnInit {
 
   ngOnInit() { }
 
-  loginUser(credentials) {
-    this.authService.loginUser(credentials).then(res => {
-      this.errorMessage = '';
-      this.storage.set( 'isUserLoggedIn', true);
-      this.navCtrl.navigateForward('/menu/home');
-    }).catch(
-      err => {
-        this.errorMessage = err;
+  login(event: Event) {
+    event.preventDefault();
+    if (this.loginForm.valid) {
+      const value = this.loginForm.value;
+      this.authService.login(value.email, value.password).then(() => {
+        this.router.navigate(['/menu']);
+      }) .catch(() => {
+          alert('no es valido');
+      });
 
-      }
-    );
+    }
   }
+
+  private buildForm() {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+    });
+  }
+
 
   goToRegister() {
     this.navCtrl.navigateForward('/register');

@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'intro', loadChildren: './intro/intro.module#IntroPageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
-  { path: 'menu', loadChildren: './menu/menu.module#MenuPageModule', canActivate: [LoginGuard, IntroGuard] }
+  { path: 'menu', loadChildren: './menu/menu.module#MenuPageModule', /*canActivate: [LoginGuard, IntroGuard]*/ }
 
 ];
 
