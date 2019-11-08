@@ -1,19 +1,26 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import {Storage} from "@ionic/storage"
+import { AuthService } from '../services/auth.service';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginGuard implements CanActivate  {
-  constructor(private storage: Storage, private router: Router){}
-  async canActivate(){
-    const isUserLoggedIn = await this.storage.get('isUserLoggedIn');
-    if (isUserLoggedIn){return true;}
-    else {this.router.navigateByUrl('/login');}
-    
-    
-  }
-  
+
+  constructor(private authService: AuthService, private router: Router) { }
+
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    return this.authService.hasUser().pipe(
+    map(user => user === null ? false : true),
+    tap(hasUser => {
+      if (!hasUser) {
+        this.router.navigate(['/login']);
+      }
+    }),
+  );
+}
 }
