@@ -18,11 +18,11 @@ export class LoginPage implements OnInit {
   validationMessages = {
     email: [
       {type: 'requiered', message: 'El Email es requerido'},
-      {type: 'pattern', message: 'Correo no valido'}
+      {type: 'pattern', message: 'El Email no es valido'}
     ],
     password: [
-      {type: 'requiered', message: 'la password es requerida'},
-      {type: 'minlength', message: 'la password deb e tener minimo 6 caracteres'}
+      {type: 'requiered', message: 'La contraseña es requerida'},
+      {type: 'minlength', message: 'La contraseña debe tener minimo 6 caracteres'}
 
     ]
 
