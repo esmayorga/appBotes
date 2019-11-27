@@ -13,9 +13,10 @@ export class HomePage implements OnInit {
   constructor(public operaciones: OperacionesService)  { }
 
   ngOnInit() {
+    /*
     this.operaciones.getUsesr().subscribe(user => {
       console.log(user);
-    });
+    });*/
   }
 }
 
