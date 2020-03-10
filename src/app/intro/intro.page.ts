@@ -46,7 +46,7 @@ export class IntroPage  {
 
   finish() {
     this.storage.set('isIntroShowed', true);
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('/home');
 
   }
 

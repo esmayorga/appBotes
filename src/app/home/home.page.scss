@@ -16,4 +16,21 @@ ion-avatar img {
 
 .squared-avatar {
     --border-radius: 0;
+
+
 }
+
+// Parte del cart 
+
+.shipImage {
+    height: 50vh;
+    object-fit: cover;
+
+}
+
+.subtitle{
+    font-weight: bold;
+    font-size: medium;
+    color: black;
+}
+

@@ -1,5 +1,6 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header class="ion-text-start">
+  <ion-toolbar color="primary" >
+    <ion-title> AppBotes </ion-title>
     <ion-buttons slot="end">
       <ion-menu-button> </ion-menu-button>
     </ion-buttons>
@@ -7,6 +8,42 @@
 </ion-header>
 
 <ion-content>
+
+
+
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title text-center> VELERO LA LUNA </ion-card-title>
+      <ion-card-subtitle></ion-card-subtitle> 
+    </ion-card-header>
+
+
+
+
+
+    <ion-card-content>
+
+      <ion-slides pager="true" [options]="slideOps">
+        <ion-slide *ngFor="let slide of slides">
+          <div>
+            <img src="{{ slide.imagen }}" alt="{{slide.description}}" class="shipImage" />
+          </div> 
+       </ion-slide>
+     </ion-slides>
+     <br/>
+      <ion-card-subtitle text-center class="subtitle"> S 3.000.000 pesos</ion-card-subtitle>
+      <ion-card-subtitle></ion-card-subtitle>
+      <ion-button color="primary" expand = "full" shape="round" > $ Navega ya</ion-button>
+      <ion-card-subtitle></ion-card-subtitle>
+      <br/>
+      Capacidad 20 personas.
+      <br/>
+      Recorrido del viaje 30 minutos
+    </ion-card-content>
+  </ion-card>
+
+
  
 
  
